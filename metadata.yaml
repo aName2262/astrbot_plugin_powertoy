@@ -1,0 +1,11 @@
+name: powertoy
+display_name: 小玩具
+author: aName2262
+desc: 读取本地状态文件，实时影响 AI 回复语气。支持指令控制：塞入、调档、拿出。
+version: 1.2.2
+short_desc: 让 AI 的语气随状态变化
+repo: https://github.com/aName2262/astrbot_plugin_powertoy
+astrbot_version: ">=4.16,<5"
+support_platforms:
+  - aiocqhttp
+  - qq_official

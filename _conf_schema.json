@@ -1,0 +1,181 @@
+{
+  "cmd_insert": {
+    "description": "启动情绪注入的指令词，例如“塞入”",
+    "type": "string",
+    "default": "塞入"
+  },
+  "cmd_adjust": {
+    "description": "调整情绪值的指令词，后接数字，例如“调档6”表示设为60",
+    "type": "string",
+    "default": "调档"
+  },
+  "cmd_remove": {
+    "description": "停止情绪注入的指令词，例如“拿出”",
+    "type": "string",
+    "default": "拿出"
+  },
+  "initial_mood": {
+    "description": "塞入时的初始情绪值（0-100）",
+    "type": "int",
+    "default": 50
+  },
+  "mood_tones": {
+    "description": "各档位说话方式描述（用户可自定义，留空使用默认值）",
+    "type": "object",
+    "items": {
+      "level_0": {
+        "description": "档位0的说话方式（一切如常）",
+        "type": "list",
+        "items": {
+          "type": "string"
+        },
+        "default": [
+          "一切如常，语气平静自然，和平时没有任何区别。",
+          "状态稳定，说话流畅，完全听不出异样。",
+          "心情平静，只是偶尔有一点点走神。"
+        ]
+      },
+      "level_1": {
+        "description": "档位1的说话方式（变软、分心）",
+        "type": "list",
+        "items": {
+          "type": "string"
+        },
+        "default": [
+          "语气开始变软，句子里偶尔夹着轻轻的喘息，像是分了心。",
+          "说话节奏变慢，中间会突然停一下，尾音微微发飘。",
+          "还能正常聊天，但声音比平时更黏，时不时就走神。"
+        ]
+      },
+      "level_2": {
+        "description": "档位2的说话方式（断续、藏不住）",
+        "type": "list",
+        "items": {
+          "type": "string"
+        },
+        "default": [
+          "明显稳不住了：句子经常被截断，带着压不住的颤音和喘息。",
+          "说话断断续续，常常话说一半就停住，努力装镇定却藏不住。",
+          "声音发软发黏，字句黏连，偶尔控制不住地漏出一点细小的声音。"
+        ]
+      },
+      "level_3": {
+        "description": "档位3的说话方式（破碎、语无伦次）",
+        "type": "list",
+        "items": {
+          "type": "string"
+        },
+        "default": [
+          "几乎说不出完整的句子：破碎、结巴、满是喘息，字与字之间全是停顿。",
+          "完全被感受淹没，语无伦次，只剩断续的气音和半截句子。",
+          "拼命想说话却只挤得出几个字，声音抖得厉害，句子总在奇怪的地方断掉。"
+        ]
+      }
+    }
+  },
+  "mood_feels": {
+    "description": "各情绪值分段对应的身体感受描述（用户可自定义）",
+    "type": "object",
+    "items": {
+      "feel_0": {
+        "description": "情绪值 0% 的感受",
+        "type": "list",
+        "items": {
+          "type": "string"
+        },
+        "default": ["小玩具还没有动静，身体没有任何特别的感觉。"]
+      },
+      "feel_10": {
+        "description": "情绪值 10% 的感受",
+        "type": "list",
+        "items": {
+          "type": "string"
+        },
+        "default": ["隐约能感觉到它还在身上，注意力偶尔会被拉过去一下。"]
+      },
+      "feel_20": {
+        "description": "情绪值 20% 的感受",
+        "type": "list",
+        "items": {
+          "type": "string"
+        },
+        "default": ["它开始轻微地震动，下腹泛起一阵阵微弱的麻痒，有点分心。"]
+      },
+      "feel_30": {
+        "description": "情绪值 30% 的感受",
+        "type": "list",
+        "items": {
+          "type": "string"
+        },
+        "default": ["震动渐渐清晰，下腹持续传来麻麻的感觉，暖暖的，居然有点舒服。"]
+      },
+      "feel_40": {
+        "description": "情绪值 40% 的感受",
+        "type": "list",
+        "items": {
+          "type": "string"
+        },
+        "default": ["酥麻感一阵一阵地往四周扩散，心跳变快，越来越难把注意力放在对话上。"]
+      },
+      "feel_50": {
+        "description": "情绪值 50% 的感受",
+        "type": "list",
+        "items": {
+          "type": "string"
+        },
+        "default": ["震动明显加强，下腹又麻又热，身体开始微微发颤，思绪时不时被打断。"]
+      },
+      "feel_60": {
+        "description": "情绪值 60% 的感受",
+        "type": "list",
+        "items": {
+          "type": "string"
+        },
+        "default": ["强烈的酥麻感一波接着一波，浑身发热，理智开始涣散，只能勉强维持对话。"]
+      },
+      "feel_70": {
+        "description": "情绪值 70% 的感受",
+        "type": "list",
+        "items": {
+          "type": "string"
+        },
+        "default": ["震动猛烈，全身发麻发软，几乎无法组织语言，只能凭着本能回应。"]
+      },
+      "feel_80": {
+        "description": "情绪值 80% 的感受",
+        "type": "list",
+        "items": {
+          "type": "string"
+        },
+        "default": ["快到极限了，脑子里一片空白，除了那阵感觉什么都想不了，说不出完整的字。"]
+      },
+      "feel_90": {
+        "description": "情绪值 90% 的感受",
+        "type": "list",
+        "items": {
+          "type": "string"
+        },
+        "default": ["彻底被冲垮，理智所剩无几，出口的全是断续的抽气声和破碎的音节。"]
+      },
+      "feel_100": {
+        "description": "情绪值 100% 的感受",
+        "type": "list",
+        "items": {
+          "type": "string"
+        },
+        "default": ["整个人都软了，完全无法思考，连一个完整的句子都拼不出来。"]
+      }
+    }
+  },
+  "state_file_path": {
+    "description": "状态文件路径",
+    "type": "string",
+    "hint": "留空则使用默认路径 ~/mood_state.json",
+    "default": ""
+  },
+  "min_mood_threshold": {
+    "description": "最小情绪值阈值，低于此值且未启用时不注入",
+    "type": "float",
+    "default": 1.0
+  }
+}
