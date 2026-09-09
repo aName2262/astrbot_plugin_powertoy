@@ -8,4 +8,3 @@ repo: https://github.com/aName2262/astrbot_plugin_powertoy
 astrbot_version: ">=4.16"
 support_platforms:
   - aiocqhttp
-  - qq_official
