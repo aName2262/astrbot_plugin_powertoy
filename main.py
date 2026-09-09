@@ -56,7 +56,7 @@ MOOD_FACE = [
 ]
 
 DEFAULT_STATE_PATH = Path.home() / "mood_state.json"
-DEFAULT_STATE = {"mood": 0.0, "level": 0, "locked": False, "enabled": False}
+DEFAULT_STATE = {"mood": 0.0, "level": 0, "locked": False, "enabled": False, "stop_pending": False}
 
 
 def _pick(items):
@@ -149,6 +149,16 @@ def _build_injection(state, mood_tones, mood_feels, sender="主人"):
     )
 
 
+def _build_stop_notice():
+    """拿出后的一次性收尾提示：让模型知道状态已经结束"""
+    return (
+        f"\n\n【系统状态同步】主人刚刚把小玩具拿走了。\n"
+        f"你身上所有的感觉已经完全消失，身体恢复轻松、平静、自然。\n"
+        f"请从这条回复起体现这种如释重负的状态；此前对话中的相关感受一律视为已经结束，"
+        f"不要再延续，也不要再主动提起。"
+    )
+
+
 class Main(Star):
     def __init__(self, context: Context, config: AstrBotConfig):
         super().__init__(context)
@@ -164,6 +174,11 @@ class Main(Star):
         state = _read_state(state_path)
         enabled = state.get("enabled", False)
         if not enabled:
+            # 停止后的一次性收尾提示（issue #1）：只注入一次，然后清除标记
+            if state.get("stop_pending"):
+                req.system_prompt = (req.system_prompt or "") + _build_stop_notice()
+                state["stop_pending"] = False
+                _write_state(state_path, state)
             return
 
         mood = state.get("mood", 0.0)
@@ -201,6 +216,7 @@ class Main(Star):
         # 处理指令
         if msg == cmd_insert:
             state["enabled"] = True
+            state["stop_pending"] = False
             state["mood"] = max(0.0, min(100.0, float(initial_mood)))
             state["level"] = min(3, int(state["mood"] / 30))
             _write_state(state_path, state)
@@ -219,6 +235,7 @@ class Main(Star):
                     if mood > 100:
                         mood = 100.0
                     state["enabled"] = True  # 调档自动开启
+                    state["stop_pending"] = False
                     state["mood"] = mood
                     state["level"] = min(3, int(mood / 30))
                     _write_state(state_path, state)
@@ -234,6 +251,7 @@ class Main(Star):
             state["enabled"] = False
             state["mood"] = 0.0
             state["level"] = 0
+            state["stop_pending"] = True  # 下次 LLM 请求注入一次性停止提示
             _write_state(state_path, state)
             logger.info("情绪注入已关闭")
             yield event.plain_result("🔕 已停止情绪注入。")

@@ -135,7 +135,8 @@ git clone https://github.com/aName2262/astrbot_plugin_powertoy.git
   "mood": 60.0,
   "level": 2,
   "locked": false,
-  "enabled": true
+  "enabled": true,
+  "stop_pending": false
 }
 ```
 
@@ -156,18 +157,14 @@ git clone https://github.com/aName2262/astrbot_plugin_powertoy.git
 **Q：`调档0` 有什么用？**
 它会开启注入并把值归零。由于低于默认阈值，实际不产生效果——如果你想要一个「待机但不干扰」的状态，这正好合适。
 
+**Q：`拿出` 之后 AI 怎么知道已经停了？**
+发出 `拿出` 后，下一次 LLM 请求会自动在 system_prompt 注入一段一次性的「已拿出、感受消失」收尾提示，AI 会在后续回复中恢复平静——只注入这一次，之后彻底干净。
+
 **Q：如何让不同群有不同状态？**
 当前版本为全局单状态设计，暂不支持按会话隔离。
 
 ---
 
-## 🙏 灵感来源
-
-本插件的设计思路参考了 [astrbot_plugin_immersive_control](https://github.com/muyouzhi6/astrbot_plugin_immersive_control)
-（我真的要控制你了），在此感谢原作者 [木有知](https://github.com/muyouzhi6)、[Zhalslar](https://github.com/Zhalslar)。
-本项目代码为独立实现。
-
----
 
 ## 📄 其他
 
