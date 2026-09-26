@@ -15,7 +15,7 @@
     "default": "拿出"
   },
   "initial_mood": {
-    "description": "塞入时的初始情绪值（0-100）",
+    "description": "塞入时的初始情绪值（0-100，超出范围自动截断）",
     "type": "int",
     "default": 50
   },
@@ -170,7 +170,7 @@
   "state_file_path": {
     "description": "状态文件路径",
     "type": "string",
-    "hint": "留空则使用默认路径 ~/mood_state.json",
+    "hint": "支持 ~ 展开与自动创建父目录；留空则使用默认路径 ~/mood_state.json",
     "default": ""
   },
   "min_mood_threshold": {
